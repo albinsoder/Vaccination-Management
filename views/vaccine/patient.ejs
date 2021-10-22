@@ -1,0 +1,91 @@
+<!- depending on what role the user has, i present different headers.
+This is the personal journal>
+
+<% if(controll === "admin") { %>
+  <%- include("styling/header", {title: title}); %>
+<% } %>
+<% if(controll === "user") { %>
+  <%- include("styling/header3", {title: title}); %>
+<% } %>
+
+
+<div class ="journalhead">
+  <div class ="middle">
+    
+    <% for (const row of res[0]) { %>
+    <input type="radio" id="radio1" name="radios" value="all" checked>
+      <label for="radio1">Notes</label>
+    <input type="radio" id="radio3" name="radios" value="true" onclick= "window.location =`/vaccine/medication/<%= row.Id %>`;">
+      <label for="radio3">Medication</label>
+    <input type="radio" id="radio4" name="radios" value="true" onclick= "window.location =`/vaccine/contact/<%= row.Id %>`;">
+      <label for="radio4">Contact</label>
+    <input type="radio" id="radio2" name="radios"value="false" onclick= "window.location =`/vaccine/write/<%= row.Id %>`;">
+      <label for="radio2">New</label>
+    <input type="radio" id="radio5" name="radios"value="false" onclick= "window.location =`/vaccine/vaccine/<%= row.Id %>`;">
+      <label for="radio5">Vaccination</label>
+    <% }; %>
+
+  <div class ="split left">
+
+    <div class = "journalbox">
+      
+      <html>
+        <body>
+          <legend><h3> Patient </h3></legend>            <ol>
+              <% for (const row of res[0]) { %>
+                <li><%= row.NameInfo%></li>
+                <li><%= row.PersonInfo %></li>
+                <li><%= row.Date %></li>
+                
+              <% }; %>
+            </ol>
+        </body>
+        </html>
+      </div>
+    </div>
+
+  
+  
+  </div>
+</div>
+
+
+  <div class ="split left">
+    <table>
+      <thead>
+          <tr>
+              <th>Date</th>
+              <th>Title</th>
+              <th>Note</th>
+
+          </tr>
+      </thead>
+      <tbody>
+      <% for (const row of res[2]) { %>
+          <tr>
+              <td><%= row.Date %></td>
+              <td><%= row.Title %></td>
+              <td><a href="/vaccine/patient/<%= row.Id %>/<%= row.Title %>"><li><img src="https://img.icons8.com/ios-glyphs/30/000000/arrow.png"/></li></a></td>
+  
+              </td>
+              
+          </tr>
+      <% }; %>
+  </table>
+
+  </div>
+  <div class ="split right">
+    <textarea cols = "100" rows = 20>
+    <% for (const row of res[4]) { %>
+      <%= row.Note %>
+    <% }; %>
+  </textarea>    
+
+  </div>
+</div>
+
+
+
+
+
+<%- include("styling/footer"); %>

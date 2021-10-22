@@ -1,0 +1,82 @@
+<!- depending on what role the user has, i present different headers.
+Here you can write a new note to patient>
+
+
+<% if(controll === "admin") { %>
+  <%- include("styling/header", {title: title}); %>
+<% } %>
+<% if(controll === "user") { %>
+  <%- include("styling/header3", {title: title}); %>
+<% } %>
+
+<div class ="journalhead">
+    <div class ="middle">
+      
+      <% for (const row of res[0]) { %>
+        <input type="radio" id="radio1" name="radios" value="false" onclick= "window.location =`/vaccine/patient/<%= row.Id %>`;">
+            <label for="radio1">Notes</label>
+        <input type="radio" id="radio3" name="radios" value="true" onclick= "window.location =`/vaccine/medication/<%= row.Id %>`;">
+            <label for="radio3">Medication</label>
+        <input type="radio" id="radio4" name="radios" value="true" onclick= "window.location =`/vaccine/contact/<%= row.Id %>`;">
+            <label for="radio4">Contact</label>
+        <input type="radio" id="radio2" name="radios"value="all" checked>
+            <label for="radio2">New</label>
+        <input type="radio" id="radio5" name="radios"value="false" onclick= "window.location =`/vaccine/vaccine/<%= row.Id %>`;">
+          <label for="radio5">Vaccination</label>
+      
+      <% }; %>
+  
+    <div class ="split left">
+  
+      <div class = "journalbox">
+        
+        <html>
+          <body>
+            <legend><h3> Patient </h3></legend>              
+            <ol>
+                <% for (const row of res[0]) { %>
+                  <li><%= row.NameInfo%></li>
+                  <li><%= row.PersonInfo %></li>
+                  <li><%= row.Date %></li>
+                <% }; %>
+                  
+
+              </ol>
+          </body>
+          </html>
+        </div>
+      </div>
+
+    
+    </div>
+    
+
+
+</div>
+
+  <div class ="middlesecond">
+    <% for (const row of res[0]) { %>
+    <form method= "POST" action="../../vaccine/write">
+      <fieldset>
+      <input type="radio" id="radio6" name="radios" value="false" onclick= "window.location =`/vaccine/write/<%= row.Id %>`;" checked>
+        <label for="radio6">Note</label>
+      <input type="radio" id="radio7" name="radios" value="true" onclick= "window.location =`/vaccine/add/<%= row.Id %>`;">
+        <label for="radio7">Medication</label><br/><br/>
+
+      <input type = "hidden" name = "Id" value = "<%= row.Id %>">
+      <label>Title:   </label><br/>
+      <input type="text" name="Title"  ><br>
+      <label>Note:</label><br/>
+      <textarea cols = "50" rows = 10 name="Note"></textarea><br>
+      <input type ="datetime-local" name ="Date"></br></br>
+      <input type="submit" value ="Create" class = "create-button">
+    </fieldset>
+  </form>
+  <% }; %>
+
+</div>
+
+
+
+
+<%- include("styling/footer"); %>

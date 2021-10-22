@@ -1,0 +1,39 @@
+<!- depending on what role the user has, i present different headers.
+Here admin can create new account>
+
+
+<% if(controll === "admin") { %>
+    <%- include("styling/header", {title: title}); %>
+  <% } %>
+  <% if(controll === "user") { %>
+    <%- include("styling/header3", {title: title}); %>
+<% } %>
+  
+<div class ="middle3">
+    <input type="radio" id="radio1" name="radios" value="false" onclick= "window.location =`/vaccine/settings/`;">
+    <label for="radio1">Accounts</label>
+    <input type="radio" id="radio2" name="radios"value="true" onclick= "window.location =`/vaccine/newaccount/`;" checked>
+    <label for="radio2">Create</label>
+</div>
+
+<div class ="middlesecond">
+    <form method= "POST" action="../../vaccine/newaccount/">
+    <fieldset class = "align-center" >
+        <legend> New Account </legend><br>
+        <label for = "user" >Username: </label><br>
+        <input type="text" name="username"><br><br>
+        <label for = "password" >Password: </label><br>
+        <input type="text" name="password"><br><br>
+        <label for = "role" >Role: </label><br>
+        <select name = "role" id = "role">
+        <option value = "User">User</option>
+        </select><br><br>
+        <input type="button" value ="Return" class = "create-button" onclick = "window.location = '../../vaccine/settings'">
+        <input type ="submit" value = "Create" class = "create-button">
+
+    </fieldset>
+</form>
+
+</div>
+
+  <%- include("styling/footer"); %>

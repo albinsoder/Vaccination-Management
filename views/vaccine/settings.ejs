@@ -1,0 +1,42 @@
+<!- depending on what role the user has, i present different headers.
+Here admin can change password or create new>
+
+
+<% if(controll === "admin") { %>
+    <%- include("styling/header", {title: title}); %>
+  <% } %>
+  <% if(controll === "user") { %>
+    <%- include("styling/header3", {title: title}); %>
+<% } %>
+
+<div class ="middle3">
+    <input type="radio" id="radio1" name="radios" value="false" onclick= "window.location =`/vaccine/settings/`;"checked>
+    <label for="radio1">Accounts</label>
+    <input type="radio" id="radio2" name="radios"value="true" onclick= "window.location =`/vaccine/newaccount/`;" >
+    <label for="radio2">Create</label>
+</div>
+
+<div class ="middlesecond">
+    <table>
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Role</th>
+                <th>Password</th>
+            </tr>
+        </thead>
+        <% for (const row of res[0]) { %>
+            <tr>
+                <td><%= row.username %></td>
+                <td><%= row.role %></td>
+                <td><a href="/vaccine/password/<%= row.id %>" > <img src="https://img.icons8.com/ios-filled/35/000000/password.png"/></a></td>
+                
+            </tr>
+        <% }; %>
+        <tbody>
+    </table>
+</div>
+
+
+
+<%- include("styling/footer"); %>

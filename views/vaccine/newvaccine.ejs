@@ -1,0 +1,88 @@
+<!- depending on what role the user has, i present different headers.
+add new vaccine to patient.>
+
+
+<% if(controll === "admin") { %>
+  <%- include("styling/header", {title: title}); %>
+<% } %>
+<% if(controll === "user") { %>
+  <%- include("styling/header3", {title: title}); %>
+<% } %>
+
+<div class ="journalhead">
+  <div class ="middle2">
+    
+    <% for (const row of res[0]) { %>
+      <input type="radio" id="radio1" name="radios" value="false" onclick= "window.location =`/vaccine/vaccine/<%= row.Id %>`;" >
+          <label for="radio1">Vaccination</label>
+      <input type="radio" id="radio2" name="radios"value="true" onclick= "window.location =`/vaccine/healthdec/<%= row.Id %>`;" >
+          <label for="radio2">Health Decleration</label>
+      <input type="radio" id="radio3" name="radios"value="true" onclick= "window.location =`/vaccine/newvaccine/<%= row.Id %>`;" checked>
+        <label for="radio3">New</label>
+      <input type="radio" id="radio4" name="radios"value="true" onclick= "window.location =`/vaccine/patient/<%= row.Id %>`;" >
+        <label for="radio4">Journal</label>
+    <% }; %>
+
+  <div class ="split left">
+
+    <div class = "journalbox">
+      
+      <html>
+        <body>
+            <h3> Patient </h3>
+            <ol>
+              <% for (const row of res[0]) { %>
+                <li><%= row.NameInfo%></li>
+                <li><%= row.PersonInfo %></li>
+                <li><%= row.Date %></li>
+              <% }; %>
+            </ol>
+        </body>
+        </html>
+      </div>
+    </div>
+  </div>
+
+
+
+<div class ="middlesecond">
+  <% for (const row of res[0]) { %>
+    
+    <form method= "POST" action="../../vaccine/newvaccine/<%= row.Id %>">
+      <fieldset class = "align-center" >
+        <legend> New Vaccine </legend>
+        <input type="radio" id="radio6" name="radios" value="false" onclick= "window.location =`/vaccine/newvaccine/<%= row.Id %>`;" checked>
+        <label for="radio6">Vaccine</label>
+        <input type="radio" id="radio7" name="radios" value="true" onclick= "window.location =`/vaccine/health/<%= row.Id %>`;">
+        <label for="radio7">Health Decleration</label><br/><br/>
+
+        <input type = "hidden" name = "Id" value = "<%= row.Id %>">
+        <label>Vaccine</label>        <label>Dose</label><br>
+        <select name ="Vaccine">
+          <option>Pfizer</option>
+          <option>Moderna</option>
+        </select>
+        <select name ="Dose">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+        </select><br><br>
+        <label>Which arm?</label><br>
+        <input type="checkbox" name ="Arm" value="Right">
+        <label for="test6">Right</label>
+        <input type="checkbox" name ="Arm" value="Left"> 
+        <label for="test7">Left</label><br/><br>
+
+        <input type ="date" name ="Date"></br></br>
+
+
+      <input type="button" value ="Return" class = "create-button" onclick = "window.location = '../../vaccine/vaccine/<%= row.Id %>'">
+      <input type="submit" value ="Create" class = "create-button">
+
+    </fieldset>
+  </form>
+  <% }; %>
+
+</div>
+
+<%- include("styling/footer"); %>

@@ -1,0 +1,85 @@
+<!- depending on what role the user has, i present different headers.
+Display personal medication>
+
+
+<% if(controll === "admin") { %>
+  <%- include("styling/header", {title: title}); %>
+<% } %>
+<% if(controll === "user") { %>
+  <%- include("styling/header3", {title: title}); %>
+<% } %>
+
+<div class ="journalhead">
+    <div class ="middle">
+      
+      <% for (const row of res[0]) { %>
+        <input type="radio" id="radio1" name="radios" value="false" onclick= "window.location =`/vaccine/patient/<%= row.Id %>`;">
+          <label for="radio1">Notes</label>
+        <input type="radio" id="radio3" name="radios" value="all" checked>
+          <label for="radio3">Medication</label>
+        <input type="radio" id="radio4" name="radios" value="true" onclick= "window.location =`/vaccine/contact/<%= row.Id %>`;">
+          <label for="radio4">Contact</label>
+        <input type="radio" id="radio2" name="radios"value="true" onclick= "window.location =`/vaccine/write/<%= row.Id %>`;">
+          <label for="radio2">New</label>
+        <input type="radio" id="radio5" name="radios"value="false" onclick= "window.location =`/vaccine/vaccine/<%= row.Id %>`;">
+          <label for="radio5">Vaccination</label>
+  
+      <% }; %>
+  
+    <div class ="split left">
+  
+      <div class = "journalbox">
+        
+        <html>
+          <body>
+              <h3> Patient </h3>
+              <ol>
+                <% for (const row of res[0]) { %>
+                  <li><%= row.NameInfo%></li>
+                  <li><%= row.PersonInfo %></li>
+                  <li><%= row.Date %></li>
+                <% }; %>
+                  
+
+              </ol>
+          </body>
+          </html>
+        </div>
+      </div>
+
+    
+    </div>
+    
+
+
+</div>
+
+  <div class ="middlesecond">
+        <table>
+            <thead>
+                <tr>
+                    <th>Medication</th>
+                    <th>Dose</th>
+                    <th>Start</th>
+                    <th>End</th>
+                    <th>Active</th>
+                </tr>
+            </thead>
+            <tbody>
+            <% for (const row of res[2]) { %>
+                <tr>
+                    <td><%= row.Name %></a></td>
+                    <td><%= row.Dose %></a></td>
+                    <td><%= row.Start %></td>
+                    <td><%= row.End %></td>
+                    <td><%= row.Active %></td>
+                </tr>
+            <% }; %>
+
+        </table>
+
+</div>
+
+
+
+<%- include("styling/footer"); %>

@@ -1,0 +1,32 @@
+<!- depending on what role the user has, i present different headers.
+Homepage>
+
+
+<% if(controll === "admin") { %>
+  <%- include("styling/header", {title: title}); %>
+<% } %>
+<% if(controll === "user") { %>
+  <%- include("styling/header3", {title: title}); %>
+<% } %>
+
+
+<div class= "middle">
+    <div class="gallery">
+      <img src="https://img.icons8.com/external-ddara-flat-ddara/512/000000/external-medical-report-medical-ddara-flat-ddara-1.png"  width="100" height="50">
+      <div class="desc">View the patients Journal</div>
+    </div>
+    <div class="gallery">
+      <img src="https://img.icons8.com/external-justicon-flat-justicon/512/000000/external-vaccine-hospital-and-medical-justicon-flat-justicon.png"  width="100" height="50">
+      <div class="desc">View patients vaccination</div>
+    </div>
+    <div class="gallery">
+      <img src="https://img.icons8.com/fluency/512/000000/overtime.png"  width="100" height="50">
+      <div class="desc">View schedule for vaccination</div>
+    </div>
+</div>
+
+
+
+
+
+<%- include("styling/footer"); %>

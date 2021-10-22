@@ -1,0 +1,53 @@
+<!- depending on what role the user has, i present different headers.
+Here all the patients get displayed>
+
+
+<% if(controll === "admin") { %>
+    <%- include("styling/header", {title: title}); %>
+  <% } %>
+  <% if(controll === "user") { %>
+    <%- include("styling/header3", {title: title}); %>
+  <% } %>
+
+<div class="container">
+
+<form id="standard" method="POST" action="../vaccine/vaccination">
+<input type="text" class="search-txt-input" name="search" maxlength="100" placeholder="Search patient...">
+<input type="submit" value="search" class="search-button">
+</form>
+    
+
+      
+<table>
+    <thead>
+        <tr>
+            <th>Firstname</th>
+            <th>Surname</th>
+            <th>Born</th>
+            <th>Security Number</th>
+            <th>Gender</th>
+            <th>Vaccination</th>
+            <th>Health Decleration</th>
+
+        </tr>
+    </thead>
+    <tbody>
+    <% for (const row of res) { %>
+        <tr>
+            <td><%= row.Firstname %></a></td>
+            <td><%= row.Surname %></td>
+            <td><%= row.Born %></td>
+            <td><%= row.SecurityNumber %></td>
+            <td><%= row.Gender %></td>
+
+            <td><a href="/vaccine/vaccine/<%= row.id %>"><li><img src="https://img.icons8.com/external-prettycons-solid-prettycons/60/000000/external-vaccine-meds-drugs-prettycons-solid-prettycons.png" width="40" height="20"></li></a></td>
+            <td><a href="/vaccine/healthdec/<%= row.id %>"><li><img src="https://img.icons8.com/ios-filled/50/000000/heart-health.png" width="40" height="20"></li></a></td>
+
+            
+        </tr>
+    <% }; %>
+</table>
+
+
+</div>
+<%- include("styling/footer"); %>

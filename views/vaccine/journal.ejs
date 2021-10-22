@@ -1,0 +1,50 @@
+<!- depending on what role the user has, i present different headers.
+Display all the patient to access journal>
+
+
+<% if(controll === "admin") { %>
+    <%- include("styling/header", {title: title}); %>
+<% } %>
+<% if(controll === "user") { %>
+    <%- include("styling/header3", {title: title}); %>
+<% } %>
+
+<div class="container">
+
+<form id="standard" method="POST" action="../vaccine/journal">
+<input type="text" class="search-txt-input" name="search" maxlength="100" placeholder="Search patient...">
+<input type="submit" value="search" class="search-button">
+</form>
+    
+
+      
+<table>
+    <thead>
+        <tr>
+            <th>Firstname</th>
+            <th>Surname</th>
+            <th>Born</th>
+            <th>Security Number</th>
+            <th>Gender</th>
+            <th>Journal</th>
+        </tr>
+    </thead>
+    <tbody>
+    <% for (const row of res) { %>
+        <tr>
+            <td><%= row.Firstname %></a></td>
+            <td><%= row.Surname %></td>
+            <td><%= row.Born %></td>
+            <td><%= row.SecurityNumber %></td>
+            <td><%= row.Gender %></td>
+
+            <td><a href="/vaccine/patient/<%= row.id %>"><li><img src="https://img.icons8.com/external-ddara-flat-ddara/64/000000/external-medical-report-medical-ddara-flat-ddara-1.png" width="50" height="30"></li></a></td>
+
+            
+        </tr>
+    <% }; %>
+</table>
+
+
+</div>
+<%- include("styling/footer"); %>

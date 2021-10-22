@@ -1,0 +1,20 @@
+<!- depending on what role the user has, i present different headers.
+Choose a date to display the schedule>
+
+
+<% if(controll === "admin") { %>
+  <%- include("styling/header", {title: title}); %>
+<% } %>
+<% if(controll === "user") { %>
+  <%- include("styling/header3", {title: title}); %>
+<% } %>
+
+<form method= "POST" action="../../vaccine/schedule">
+  <fieldset class = "align-center" >
+    <legend> Bookings </legend>
+    <label>Choose date</label><br>
+    <input type="date" name ="date"><br><br>
+    <input type="submit" value="Show" class = "create-button">
+  </fieldset>
+</form>
+<%- include("styling/footer"); %>

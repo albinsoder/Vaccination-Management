@@ -1,0 +1,22 @@
+<!- depending on what role the user has, i present different headers>
+
+
+<% if(controll === "admin") { %>
+  <%- include("styling/header", {title: title}); %>
+<% } %>
+<% if(controll === "user") { %>
+  <%- include("styling/header3", {title: title}); %>
+<% } %>
+
+
+<div class="login"> 
+    <form class="login-container" method = "POST" action="../vaccine/logout">
+            <p><input type="submit" value="Log out"></p>
+            </form>
+        </form>
+  </div>
+
+</form>
+
+
+<%- include("styling/footer"); %>

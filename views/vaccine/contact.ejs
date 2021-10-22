@@ -1,0 +1,55 @@
+<!- depending on what role the user has, i present different headers.
+Contactinforation for patient>
+
+
+<% if(controll === "admin") { %>
+  <%- include("styling/header", {title: title}); %>
+<% } %>
+<% if(controll === "user") { %>
+  <%- include("styling/header3", {title: title}); %>
+<% } %>
+
+<div class ="middle">
+      
+    <% for (const row of res[0]) { %>
+      <input type="radio" id="radio1" name="radios" value="false" onclick= "window.location =`/vaccine/patient/<%= row.Id %>`;">
+          <label for="radio1">Notes</label>
+      <input type="radio" id="radio3" name="radios" value="true" onclick= "window.location =`/vaccine/medication/<%= row.Id %>`;">
+          <label for="radio3">Medication</label>
+      <input type="radio" id="radio4" name="radios" value="true" checked>
+          <label for="radio4">Contact</label>
+      <input type="radio" id="radio2" name="radios"value="all" onclick= "window.location =`/vaccine/write/<%= row.Id %>`;">
+          <label for="radio2">New</label>
+      <input type="radio" id="radio5" name="radios"value="false" onclick= "window.location =`/vaccine/vaccine/<%= row.Id %>`;">
+        <label for="radio5">Vaccination</label>
+
+    <% }; %>
+</div>
+
+<div class ="middlesecond">
+    <% for (const row of res[0]) { %>
+  
+      <form method= "POST" action="../../vaccine/healthdec/<%= row.Id %>">
+        <fieldset class = "align-center" >
+          <legend> Contact Information </legend><br>
+    
+          <label>Firstname:</label>
+          <%= row.Firstname %><br><br>
+          <label>Surname:</label>
+          <%= row.Surname %><br><br>
+          <label>Adress:</label>
+          <%= row.ContactPerson %><br><br>
+          <label>Phonenumber:</label>
+          <%= row.PhoneNumber %><br><br>
+          <label>Contactperson:</label>
+          <%= row.Adress %><br><br>
+          <label>Contactnumber:</label>
+          <%= row.ContactNumber %><br><br>
+
+      </fieldset>
+    </form>
+    <% }; %>
+  
+  </div>
+
+<%- include("styling/footer"); %>

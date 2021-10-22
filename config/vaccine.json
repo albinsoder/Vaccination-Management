@@ -1,0 +1,10 @@
+{
+    "host":     "localhost",
+    "user":     "user",
+    "password": "pass",
+    "database": "vaccineProject",
+    "multipleStatements": true,
+    "connectionLimit": 10,
+    "waitForConnections": true,
+    "queueLimit": 0
+}

@@ -1,0 +1,70 @@
+<!- depending on what role the user has, i present different headers.
+Here is the personal vaccinepage for patient>
+
+
+<% if(controll === "admin") { %>
+  <%- include("styling/header", {title: title}); %>
+<% } %>
+<% if(controll === "user") { %>
+  <%- include("styling/header3", {title: title}); %>
+<% } %>
+<div class ="journalhead">
+  <div class ="middle2">
+    
+    <% for (const row of res[0]) { %>
+      <input type="radio" id="radio1" name="radios" value="false" onclick= "window.location =`/vaccine/vaccine/<%= row.Id %>`;" checked>
+          <label for="radio1">Vaccination</label>
+      <input type="radio" id="radio2" name="radios"value="true" onclick= "window.location =`/vaccine/healthdec/<%= row.Id %>`;" >
+          <label for="radio2">Health Decleration</label>
+      <input type="radio" id="radio3" name="radios"value="true" onclick= "window.location =`/vaccine/newvaccine/<%= row.Id %>`;" >
+        <label for="radio3">New</label>
+      <input type="radio" id="radio4" name="radios"value="true" onclick= "window.location =`/vaccine/patient/<%= row.Id %>`;" >
+        <label for="radio4">Journal</label>
+    <% }; %>
+
+  <div class ="split left">
+
+    <div class = "journalbox">
+      
+      <html>
+        <body>
+            <legend><h3> Patient </h3></legend>
+            <ol>
+              <% for (const row of res[0]) { %>
+                <li><%= row.NameInfo%></li>
+                <li><%= row.PersonInfo %></li>
+                <li><%= row.Date %></li>
+              <% }; %>
+            </ol>
+        </body>
+        </html>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class ="middlesecond">
+      <table>
+          <thead>
+              <tr>
+                  <th>Vaccine</th>
+                  <th>Dose</th>
+                  <th>Arm</th>
+                  <th>Date</th>
+
+              </tr>
+          </thead>
+          <tbody>
+          <% for (const row of res[2]) { %>
+              <tr>
+                  <td><%= row.Name %></a></td>
+                  <td><%= row.Dose %></a></td>
+                  <td><%= row.Arm %></a></td>
+                  <td><%= row.Date %></td>
+              </tr>
+          <% }; %>
+
+      </table>
+
+</div>
+<%- include("styling/footer"); %>
